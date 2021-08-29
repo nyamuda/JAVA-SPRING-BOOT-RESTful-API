@@ -1,6 +1,6 @@
 package com.physicsdefinitions.science.Repositories;
 
-import java.util.List;
+import java.util.Optional;
 
 import com.physicsdefinitions.science.Models.PhysicsTopic;
 
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PhysicsTopicsRepository extends JpaRepository<PhysicsTopic, Integer> {
 
-    @Query("SELECT p FROM PhysicsTopic p")
-    public List<PhysicsTopic> getNames();
+    @Query("SELECT p FROM PhysicsTopic p WHERE p.id=?1")
+    public Optional<PhysicsTopic> getTopic(int id);
 
 }

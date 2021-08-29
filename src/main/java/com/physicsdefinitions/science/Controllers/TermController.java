@@ -1,6 +1,7 @@
 package com.physicsdefinitions.science.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Services.TermService;
@@ -22,14 +23,20 @@ public class TermController {
 
     @GetMapping("/terms")
     @ResponseBody
-    public List<Term> getTerms() {
-        return term.getTerms();
+    public List<Term> getAllTerms() {
+        return term.getAllTerms();
     }
 
     @GetMapping("/terms/{id}")
     @ResponseBody
     public List<Term> getTopicTerms(@PathVariable("id") int id) {
         return term.getTermsForTopic(id);
+    }
+
+    @GetMapping("/term/{id}")
+    @ResponseBody
+    public Optional<Term> getTerm(@PathVariable("id") int id) {
+        return term.getTerm(id);
     }
 
 }

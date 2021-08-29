@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.physicsdefinitions.science.Models.PhysicsTopic;
 
@@ -13,22 +14,18 @@ import com.physicsdefinitions.science.Models.PhysicsTopic;
 public class PhysicsTopicsService {
 
     @Autowired
-    private PhysicsTopicsRepository repository;
+    private PhysicsTopicsRepository repo;
 
-    public PhysicsTopicsService(PhysicsTopicsRepository repository) {
-        this.repository = repository;
+    public PhysicsTopicsService(PhysicsTopicsRepository repo) {
+        this.repo = repo;
     }
 
     public List<PhysicsTopic> getTopics() {
-        return repository.findAll();
+        return repo.findAll();
     }
 
-    public PhysicsTopic getTopic(int id) {
-        return repository.getById(id);
-    }
-
-    public List<PhysicsTopic> getNames() {
-        return repository.getNames();
+    public Optional<PhysicsTopic> getTopic(int id) {
+        return repo.getTopic(id);
     }
 
 }

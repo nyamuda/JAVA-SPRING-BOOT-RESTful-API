@@ -1,6 +1,7 @@
 package com.physicsdefinitions.science.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Repositories.TermRepository;
@@ -17,12 +18,16 @@ public class TermService {
         this.term = term;
     }
 
-    public List<Term> getTerms() {
-        return term.getTerms();
+    public List<Term> getAllTerms() {
+        return term.findAll();
     }
 
     public List<Term> getTermsForTopic(int id) {
         return term.getTermsForTopic(id);
+    }
+
+    public Optional<Term> getTerm(int id) {
+        return term.getTerm(id);
     }
 
 }

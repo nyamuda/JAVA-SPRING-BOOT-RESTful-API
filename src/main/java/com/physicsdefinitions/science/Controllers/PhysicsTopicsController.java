@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class PhysicsTopicsController {
@@ -31,20 +30,8 @@ public class PhysicsTopicsController {
 
     @GetMapping("/topic/{id}")
     @ResponseBody
-    public List<PhysicsTopic> getTopic(@PathVariable("id") int id) {
-
-        System.out.println("tatenda");
-        PhysicsTopic x = topics.getTopic(id);
-        return Arrays.asList(x);
-
-    }
-
-    @GetMapping("/names")
-    @ResponseBody
-    public List<PhysicsTopic> getNames() {
-
-        return topics.getNames();
-
+    public Optional<PhysicsTopic> getTopic(@PathVariable("id") int id) {
+        return topics.getTopic(id);
     }
 
 }
