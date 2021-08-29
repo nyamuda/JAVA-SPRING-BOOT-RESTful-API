@@ -18,6 +18,9 @@ public class Term {
     @JoinColumn(name = "physics_topic_id")
     private PhysicsTopic physicsTopic;
 
+    public Term() {
+    }
+
     public int getId() {
         return id;
     }
