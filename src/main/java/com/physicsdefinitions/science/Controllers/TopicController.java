@@ -1,7 +1,7 @@
 package com.physicsdefinitions.science.Controllers;
 
-import com.physicsdefinitions.science.Models.PhysicsTopic;
-import com.physicsdefinitions.science.Services.PhysicsTopicsService;
+import com.physicsdefinitions.science.Models.Topic;
+import com.physicsdefinitions.science.Services.TopicService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class PhysicsTopicsController {
+public class TopicController {
     @Autowired
-    private PhysicsTopicsService topics;
+    private TopicService topics;
 
-    public PhysicsTopicsController(PhysicsTopicsService topics) {
+    public TopicController(TopicService topics) {
         this.topics = topics;
     }
 
     @GetMapping("/topics")
     @ResponseBody
-    public List<PhysicsTopic> getTopics() {
+    public List<Topic> getTopics() {
 
         return topics.getTopics();
 
@@ -30,7 +30,7 @@ public class PhysicsTopicsController {
 
     @GetMapping("/topic/{id}")
     @ResponseBody
-    public Optional<PhysicsTopic> getTopic(@PathVariable("id") int id) {
+    public Optional<Topic> getTopic(@PathVariable("id") int id) {
         return topics.getTopic(id);
     }
 

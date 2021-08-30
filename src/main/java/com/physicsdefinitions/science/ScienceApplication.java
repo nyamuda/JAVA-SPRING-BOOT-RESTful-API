@@ -11,7 +11,7 @@ public class ScienceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ScienceApplication.class, args);
 
-		System.out.println("thank you so much");
+		System.out.println("THANK YOU SO MUCH");
 	}
 
 }

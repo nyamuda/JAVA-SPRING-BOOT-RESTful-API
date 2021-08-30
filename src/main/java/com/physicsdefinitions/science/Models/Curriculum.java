@@ -1,44 +1,34 @@
 package com.physicsdefinitions.science.Models;
 
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import javax.persistence.Table;
-import javax.persistence.GeneratedValue;
-
-import javax.persistence.GenerationType;
-
 @Entity
-@Table
-public class PhysicsTopic {
+public class Curriculum {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String name;
+    private String curriculumName;
 
-    public PhysicsTopic() {
+    public Curriculum() {
     }
 
-    public PhysicsTopic(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public String getCurriculumName() {
+        return curriculumName;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public void setCurriculumName(String curriculumName) {
+        this.curriculumName = curriculumName;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }
