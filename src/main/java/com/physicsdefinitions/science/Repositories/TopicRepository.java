@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
- * PhysicsTopicsRepository
+ * TopicsRepository
  */
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Integer> {
 
-    @Query("SELECT p FROM Topic p WHERE p.id=?1")
+    @Query("SELECT t FROM Topic t WHERE t.id=?1")
     public Optional<Topic> getTopic(int id);
 
 }

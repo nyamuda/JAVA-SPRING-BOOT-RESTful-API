@@ -2,21 +2,21 @@ package com.physicsdefinitions.science.Models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
+@Table(name = "terms")
 public class Term {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String term_name;
-    private String definition;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private String termName;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id")
     private Topic topic;
 
@@ -27,15 +27,11 @@ public class Term {
         return id;
     }
 
-    public String getTerm_name() {
-        return term_name;
+    public String getTermName() {
+        return termName;
     }
 
-    public String getDefinition() {
-        return definition;
-    }
-
-    public Topic getPhysicsTopic() {
+    public Topic getTopic() {
         return topic;
     }
 
@@ -43,15 +39,11 @@ public class Term {
         this.id = id;
     }
 
-    public void setTerm_name(String term_name) {
-        this.term_name = term_name;
+    public void setTermName(String termName) {
+        this.termName = termName;
     }
 
-    public void setDefinition(String definition) {
-        this.definition = definition;
-    }
-
-    public void setPhysicsTopic(Topic topic) {
+    public void setTopic(Topic topic) {
         this.topic = topic;
     }
 

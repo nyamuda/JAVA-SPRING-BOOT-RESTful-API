@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -17,16 +16,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table
+@Table(name = "topics")
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "topic_curriculum", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = {
             @JoinColumn(name = "curriculum_id") })
     private Set<Curriculum> curriculums = new HashSet<Curriculum>();
