@@ -45,4 +45,11 @@ public class TermController {
         return termService.getTerm(id);
     }
 
+    // SEARCH FOR A PARTICULAR TERM
+    @GetMapping("curriculum/{curriculumId}/term/{termName}")
+    @ResponseBody
+    public List<Term> searchTerm(@PathVariable("curriculumId") int curId, @PathVariable("termName") String tName) {
+        return termService.searchTerm(curId, tName);
+    }
+
 }

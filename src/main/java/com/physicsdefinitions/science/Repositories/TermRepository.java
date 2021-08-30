@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface TermRepository extends JpaRepository<Term, Integer> {
 
     // GET TERMS FOR PARTICULAR SUBJECT AND CURRICULUM
-    @Query(value = "SELECT * FROM terms JOIN topics on terms.topic_id=topics.id JOIN topic_curriculum tc ON tc.topic_id==topics.id WHERE topics.subject_id=?1 AND tc.curriculum_id=?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM terms JOIN topics on terms.topic_id=topics.id JOIN topic_curriculum tc ON tc.topic_id=topics.id WHERE topics.subject_id=?1 AND tc.curriculum_id=?2", nativeQuery = true)
     public List<Term> getAllTerms(int subjectId, int curriculumId);
 
     // GET TERMS FOR A PARTICULAR CURRICULUM AND TOPIC
@@ -22,7 +22,12 @@ public interface TermRepository extends JpaRepository<Term, Integer> {
     public List<Term> getTermsForTopic(int curriculumId, int topicId);
 
     // GET A PARTICULAR TERM
-    @Query("SELECT t FROM Term t WHERE t.id=?1")
+    @Query(value = "SELECT * FROM terms t JOIN term_curriculum tc ON t.id=tc.term_id WHERE tc.curriculum_id=?1 AND t.term_name LIKE ?2"
+            + "%", nativeQuery = true)
+    public List<Term> searchTerm(int curriculumId, String termName);
+
+    // SEARCH FOR A PARTICULAR TERM
+    @Query(value = "SELECT * FROM terms WHERE t.id=?1", nativeQuery = true)
     public Optional<Term> getTerm(int id);
 
 }

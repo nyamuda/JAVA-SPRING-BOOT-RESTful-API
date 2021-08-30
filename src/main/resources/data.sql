@@ -60,6 +60,8 @@ set @caps=last_insert_id();
 
 
 
+
+
 /* TOPIC_CURRICULUM TABLE */
 
 /*CAPS TOPICS */
@@ -110,33 +112,81 @@ INSERT INTO terms values
 (default,"period",@waves);
 set @period=last_insert_id();
 
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@period);
+INSERT INTO term_curriculum values
+(@caps,@period);
+
+
 INSERT INTO terms values
 (default,"couple",@dynamics);
 set @couple=last_insert_id();
+
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@couple);
+INSERT INTO term_curriculum values
+(@caps,@couple);
 
 INSERT INTO terms values
 (default,"velocity",@kinematics);
 set @velocity=last_insert_id();
 
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@velocity);
+INSERT INTO term_curriculum values
+(@caps,@velocity);
+
+
 INSERT INTO terms values
 (default,"work",@wep);
 set @work=last_insert_id();
+
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@work);
+INSERT INTO term_curriculum values
+(@caps,@work);
+
 
 INSERT INTO terms values
 (default,"coulomb",@electricity);
 set @coulomb=last_insert_id();
 
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@coulomb);
+INSERT INTO term_curriculum values
+(@caps,@coulomb);
+
+
 INSERT INTO terms values
 (default,"relative atomic mass",@atom);
 set @ram=last_insert_id();
+
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@ram);
 
 INSERT INTO terms values
 (default,"first ionisation energy",@bonding);
 set @fie=last_insert_id();
 
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@fie);
+
 INSERT INTO terms values
 (default,"Lattice energy",@electro);
 set @le=last_insert_id();
+
+/*term_curriculum table*/
+INSERT INTO term_curriculum values
+(@cam,@le);
+
+
 
 /* DEFINITIONS*/
 

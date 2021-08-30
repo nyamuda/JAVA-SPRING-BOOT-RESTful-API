@@ -32,4 +32,8 @@ public class TermService {
         return term.getTerm(id);
     }
 
+    public List<Term> searchTerm(int curriculumId, String termName) {
+        return term.searchTerm(curriculumId, termName);
+    }
+
 }
