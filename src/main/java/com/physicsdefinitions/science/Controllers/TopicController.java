@@ -20,18 +20,20 @@ public class TopicController {
         this.topics = topics;
     }
 
-    @GetMapping("/topics")
-    @ResponseBody
-    public List<Topic> getTopics() {
+    /* GET ALL TOPICS FOR A PARTICULAR SUBJECT AND CURRICULUM */
 
-        return topics.getTopics();
+    @GetMapping("subject/{subjectId}/curriculum/{curriculumId}/topics")
+    @ResponseBody
+    public List<Topic> getTopics(@PathVariable("subjectId") int subId, @PathVariable("curriculumId") int curId) {
+
+        return topics.getTopics(subId, curId);
 
     }
 
-    @GetMapping("/topic/{id}")
+    @GetMapping("curriculum/{curriculumId}/topic/{topicId}")
     @ResponseBody
-    public Optional<Topic> getTopic(@PathVariable("id") int id) {
-        return topics.getTopic(id);
+    public Optional<Topic> getTopic(@PathVariable("curriculumId") int curId, @PathVariable("topicId") int topId) {
+        return topics.getTopic(curId, topId);
     }
 
 }

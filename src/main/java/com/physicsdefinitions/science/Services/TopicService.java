@@ -20,12 +20,12 @@ public class TopicService {
         this.repo = repo;
     }
 
-    public List<Topic> getTopics() {
-        return repo.findAll();
+    public List<Topic> getTopics(int subjectId, int curriculumId) {
+        return repo.getSubjectTopics(subjectId, curriculumId);
     }
 
-    public Optional<Topic> getTopic(int id) {
-        return repo.getTopic(id);
+    public Optional<Topic> getTopic(int curriculumId, int topicId) {
+        return repo.getTopic(curriculumId, topicId);
     }
 
 }

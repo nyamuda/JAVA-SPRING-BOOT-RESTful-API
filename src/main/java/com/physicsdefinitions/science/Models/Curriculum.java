@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -20,6 +23,8 @@ public class Curriculum {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String curriculumName;
+
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "term_curriculum", joinColumns = { @JoinColumn(name = "curriculum_id") }, inverseJoinColumns = {
             @JoinColumn(name = "term_id") })

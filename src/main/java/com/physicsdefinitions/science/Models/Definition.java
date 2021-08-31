@@ -39,12 +39,12 @@ public class Definition {
         return keywords;
     }
 
-    public Term getTerm() {
-        return term;
+    public int getTerm() {
+        return term.getId();
     }
 
-    public Curriculum getCurriculum() {
-        return curriculum;
+    public int getCurriculum() {
+        return curriculum.getId();
     }
 
     public void setId(int id) {

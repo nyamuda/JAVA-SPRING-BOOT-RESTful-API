@@ -22,8 +22,7 @@ public interface TermRepository extends JpaRepository<Term, Integer> {
     public List<Term> getTermsForTopic(int curriculumId, int topicId);
 
     // GET A PARTICULAR TERM
-    @Query(value = "SELECT * FROM terms t JOIN term_curriculum tc ON t.id=tc.term_id WHERE tc.curriculum_id=?1 AND t.term_name LIKE ?2"
-            + "%", nativeQuery = true)
+    @Query(value = "SELECT * FROM terms t JOIN term_curriculum tc ON t.id=tc.term_id WHERE tc.curriculum_id=?1 AND t.term_name LIKE CONCAT(?2,'%')", nativeQuery = true)
     public List<Term> searchTerm(int curriculumId, String termName);
 
     // SEARCH FOR A PARTICULAR TERM

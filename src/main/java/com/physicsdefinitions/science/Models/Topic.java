@@ -11,6 +11,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.GenerationType;
@@ -25,6 +28,7 @@ public class Topic {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "topic_curriculum", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = {
             @JoinColumn(name = "curriculum_id") })
