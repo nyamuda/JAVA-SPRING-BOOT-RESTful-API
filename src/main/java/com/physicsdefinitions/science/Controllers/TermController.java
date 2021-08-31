@@ -19,7 +19,7 @@ public class TermController {
     @Autowired
     private TermService termService;
 
-    TermController(TermService termService) {
+    public TermController(TermService termService) {
         this.termService = termService;
     }
 

@@ -24,8 +24,8 @@ public class TopicService {
         return repo.getSubjectTopics(subjectId, curriculumId);
     }
 
-    public Optional<Topic> getTopic(int curriculumId, int topicId) {
-        return repo.getTopic(curriculumId, topicId);
+    public Optional<Topic> getTopic(int topicId) {
+        return repo.getTopic(topicId);
     }
 
 }

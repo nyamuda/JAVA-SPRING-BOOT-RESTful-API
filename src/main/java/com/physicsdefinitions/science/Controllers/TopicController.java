@@ -30,10 +30,12 @@ public class TopicController {
 
     }
 
-    @GetMapping("curriculum/{curriculumId}/topic/{topicId}")
+    /* GET A PARTICULAR TOPIC */
+
+    @GetMapping("topic/{topicId}")
     @ResponseBody
-    public Optional<Topic> getTopic(@PathVariable("curriculumId") int curId, @PathVariable("topicId") int topId) {
-        return topics.getTopic(curId, topId);
+    public Optional<Topic> getTopic(@PathVariable("topicId") int topId) {
+        return topics.getTopic(topId);
     }
 
 }
