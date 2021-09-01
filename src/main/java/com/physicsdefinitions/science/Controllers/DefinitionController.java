@@ -6,6 +6,7 @@ import com.physicsdefinitions.science.Models.Definition;
 import com.physicsdefinitions.science.Services.DefinitionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ public class DefinitionController {
     // getting the definition of a term of a particular curriculum
     @GetMapping("curriculum/{curriculumId}/term/{termId}/definition")
     @ResponseBody
+    @CrossOrigin
     public Optional<Definition> getDefinition(@PathVariable("curriculumId") int curId,
             @PathVariable("termId") int termId) {
         return defService.getDefinition(curId, termId);
