@@ -25,7 +25,7 @@ public class TermController {
     }
 
     // TO GET TERMS FOR A PARTICULAR SUBJECT AND CURRICULUM
-    @GetMapping("subject/{subjectId}/curriculum/{curriculumId}/terms")
+    @GetMapping("curriculum/{curriculumId}/subject/{subjectId}/terms")
     @ResponseBody
     @CrossOrigin
     public List<Term> getCurriculumTerms(@PathVariable("subjectId") int subId,
