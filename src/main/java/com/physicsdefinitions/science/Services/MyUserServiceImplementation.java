@@ -2,13 +2,18 @@ package com.physicsdefinitions.science.Services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
 import com.physicsdefinitions.science.Repositories.MyUserRepo;
 import com.physicsdefinitions.science.Repositories.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+@Transactional
 public class MyUserServiceImplementation implements MyUserService {
     @Autowired
     private MyUserRepo userRepo;
