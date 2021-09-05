@@ -10,6 +10,7 @@ import com.physicsdefinitions.science.Repositories.MyUserRepo;
 import com.physicsdefinitions.science.Repositories.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,16 +20,18 @@ public class MyUserServiceImplementation implements MyUserService {
     private MyUserRepo userRepo;
     @Autowired
     private RoleRepository roleRepo;
+    private PasswordEncoder passwordEncoder;
 
-    public MyUserServiceImplementation(MyUserRepo userRepo, RoleRepository roleRepo) {
+    public MyUserServiceImplementation(MyUserRepo userRepo, RoleRepository roleRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public void saveUser(MyUser user) {
-        userRepo.save(user);
-
+    public MyUser saveUser(MyUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepo.save(user);
     }
 
     @Override

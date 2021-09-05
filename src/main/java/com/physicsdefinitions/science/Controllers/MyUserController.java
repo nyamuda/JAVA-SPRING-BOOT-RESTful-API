@@ -38,8 +38,8 @@ public class MyUserController {
 
     @PostMapping("/users/save")
     @ResponseBody
-    public void saveUser(@RequestBody MyUser user) {
-        userService.saveUser(user);
+    public ResponseEntity<MyUser> saveUser(@RequestBody MyUser user) {
+        return ResponseEntity.ok().body(userService.saveUser(user));
     }
 
     @PostMapping("/roles/save")
