@@ -8,6 +8,7 @@ import com.physicsdefinitions.science.Services.MyUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ public class MyUserController {
     }
 
     @GetMapping("/users")
+    @CrossOrigin
     @ResponseBody
     public ResponseEntity<List<MyUser>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
@@ -32,26 +34,36 @@ public class MyUserController {
 
     @GetMapping("/roles")
     @ResponseBody
+    @CrossOrigin
     public ResponseEntity<List<Role>> getRoles() {
         return ResponseEntity.ok().body(userService.getRoles());
     }
 
     @PostMapping("/users/save")
     @ResponseBody
+    @CrossOrigin
     public ResponseEntity<MyUser> saveUser(@RequestBody MyUser user) {
         return ResponseEntity.ok().body(userService.saveUser(user));
     }
 
     @PostMapping("/roles/save")
     @ResponseBody
+    @CrossOrigin
     public void saveRole(@RequestBody Role role) {
         userService.saveRole(role);
     }
 
     @PostMapping("/users/add_role")
     @ResponseBody
+    @CrossOrigin
     public void addRoleToUser(@RequestBody addRoleToUserData data) {
         userService.addRoleToUser(data.getUsername(), data.getRoleName());
+    }
+
+    @PostMapping("/login")
+    @CrossOrigin
+    public ResponseEntity<MyUser> login() {
+        return ResponseEntity.ok().build();
     }
 
 }
