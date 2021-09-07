@@ -1,12 +1,17 @@
 package com.physicsdefinitions.science.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.validation.Valid;
 
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
 import com.physicsdefinitions.science.Services.MyUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,29 +46,36 @@ public class MyUserController {
 
     @PostMapping("/users/save")
     @ResponseBody
-    @CrossOrigin
-    public ResponseEntity<MyUser> saveUser(@RequestBody MyUser user) {
-        return ResponseEntity.ok().body(userService.saveUser(user));
+    public ResponseEntity<Object> saveUser(@Valid @RequestBody MyUser user) {
+
+        try {
+            userService.saveUser(user);
+            return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            Map<String, String> errorInfo = new HashMap<>();
+            Map<String, Map<String, String>> errorBody = new HashMap<>();
+            errorInfo.put("username", "Username has been taken.");
+            errorBody.put("errors", errorInfo);
+
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody);
+        }
+
     }
 
     @PostMapping("/roles/save")
     @ResponseBody
     @CrossOrigin
-    public void saveRole(@RequestBody Role role) {
+    public ResponseEntity<Object> saveRole(@RequestBody Role role) {
         userService.saveRole(role);
+        return ResponseEntity.status(HttpStatus.OK).body("Role added.");
     }
 
     @PostMapping("/users/add_role")
     @ResponseBody
     @CrossOrigin
-    public void addRoleToUser(@RequestBody addRoleToUserData data) {
+    public ResponseEntity<Object> addRoleToUser(@RequestBody addRoleToUserData data) {
         userService.addRoleToUser(data.getUsername(), data.getRoleName());
-    }
-
-    @PostMapping("/login")
-    @CrossOrigin
-    public ResponseEntity<MyUser> login() {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.OK).body("Role added to user.");
     }
 
 }
