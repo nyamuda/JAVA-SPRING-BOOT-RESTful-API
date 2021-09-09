@@ -41,7 +41,7 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
                 .hasAnyAuthority("USER", "ADMIN").antMatchers("/curriculum**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/subject**").hasAnyAuthority("USER", "ADMIN").antMatchers("/topic**")
                 .hasAnyAuthority("USER", "ADMIN").antMatchers("/term**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/topic**").hasAnyAuthority("USER", "ADMIN").antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers("/topic**").hasAnyAuthority("USER", "ADMIN").antMatchers("/users").permitAll()
                 .antMatchers("/role**").hasAuthority("ADMIN").antMatchers("/user/add_role").hasAuthority("ADMIN");
         http.csrf().disable();
         http.formLogin().disable();
