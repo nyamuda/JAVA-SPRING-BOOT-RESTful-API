@@ -29,9 +29,12 @@ public class MyUserServiceImplementation implements MyUserService {
     }
 
     @Override
-    public MyUser saveUser(MyUser user) {
+    public void saveUser(MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        userRepo.save(user);
+        // adding a default role to the user-->USER
+        addRoleToUser(user.getUsername(), "USER");
+
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.physicsdefinitions.science.Models.Topic;
 import com.physicsdefinitions.science.Services.TopicService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,10 +25,10 @@ public class TopicController {
 
     @GetMapping("subject/{subjectId}/curriculum/{curriculumId}/topics")
     @ResponseBody
-    @CrossOrigin
-    public List<Topic> getTopics(@PathVariable("subjectId") int subId, @PathVariable("curriculumId") int curId) {
+    public ResponseEntity<List<Topic>> getTopics(@PathVariable("subjectId") int subId,
+            @PathVariable("curriculumId") int curId) {
 
-        return topics.getTopics(subId, curId);
+        return ResponseEntity.ok().body(topics.getTopics(subId, curId));
 
     }
 
@@ -36,9 +36,8 @@ public class TopicController {
 
     @GetMapping("topic/{topicId}")
     @ResponseBody
-    @CrossOrigin
-    public Optional<Topic> getTopic(@PathVariable("topicId") int topId) {
-        return topics.getTopic(topId);
+    public ResponseEntity<Optional<Topic>> getTopic(@PathVariable("topicId") int topId) {
+        return ResponseEntity.ok().body(topics.getTopic(topId));
     }
 
 }

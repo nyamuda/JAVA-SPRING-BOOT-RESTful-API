@@ -8,7 +8,6 @@ import com.physicsdefinitions.science.Services.CurriculumService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,7 +24,6 @@ public class CurriculumController {
 
     // GET ALL CURRICULUMS
     @GetMapping("/curriculums")
-    @CrossOrigin
     @ResponseBody
     public ResponseEntity<List<Curriculum>> getCurriculums() {
         return ResponseEntity.ok().body(currService.getAllCurriculums());
@@ -33,10 +31,9 @@ public class CurriculumController {
 
     // GET A PARTICULAR CURRICULUM
     @GetMapping("curriculum/{id}")
-    @CrossOrigin
     @ResponseBody
-    public Optional<Curriculum> getCurriculum(@PathVariable("id") int id) {
-        return currService.getCurriculum(id);
+    public ResponseEntity<Optional<Curriculum>> getCurriculum(@PathVariable("id") int id) {
+        return ResponseEntity.ok().body(currService.getCurriculum(id));
     }
 
 }

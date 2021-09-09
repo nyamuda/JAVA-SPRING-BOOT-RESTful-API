@@ -10,7 +10,7 @@ public interface MyUserService {
 
     public List<Role> getRoles();
 
-    public MyUser saveUser(MyUser user);
+    public void saveUser(MyUser user);
 
     public void addRoleToUser(String username, String roleName);
 

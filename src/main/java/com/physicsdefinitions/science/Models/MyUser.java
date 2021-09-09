@@ -46,6 +46,13 @@ public class MyUser {
     public MyUser() {
     }
 
+    public MyUser(String username, String password, String firstName, String secondName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
+
     public int getId() {
         return id;
     }

@@ -8,7 +8,7 @@ import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Services.TermService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,34 +27,32 @@ public class TermController {
     // TO GET TERMS FOR A PARTICULAR SUBJECT AND CURRICULUM
     @GetMapping("curriculum/{curriculumId}/subject/{subjectId}/terms")
     @ResponseBody
-    @CrossOrigin
-    public List<Term> getCurriculumTerms(@PathVariable("subjectId") int subId,
+    public ResponseEntity<List<Term>> getCurriculumTerms(@PathVariable("subjectId") int subId,
             @PathVariable("curriculumId") int curId) {
-        return termService.getAllTerms(subId, curId);
+        return ResponseEntity.ok().body(termService.getAllTerms(subId, curId));
     }
 
     // TO GET TERMS FOR A PARTICULAR CURRICULUM, AND TOPIC
     @GetMapping("curriculum/{curriculumId}/topic/{topicId}/terms")
     @ResponseBody
-    @CrossOrigin
-    public List<Term> getTopicTerms(@PathVariable("curriculumId") int curId, @PathVariable("topicId") int topId) {
-        return termService.getTopicTerms(curId, topId);
+    public ResponseEntity<List<Term>> getTopicTerms(@PathVariable("curriculumId") int curId,
+            @PathVariable("topicId") int topId) {
+        return ResponseEntity.ok().body(termService.getTopicTerms(curId, topId));
     }
 
     // TO GET A PARTICULAR TERM
     @GetMapping("/term/{id}")
     @ResponseBody
-    @CrossOrigin
-    public Optional<Term> getTerm(@PathVariable("id") int id) {
-        return termService.getTerm(id);
+    public ResponseEntity<Optional<Term>> getTerm(@PathVariable("id") int id) {
+        return ResponseEntity.ok().body(termService.getTerm(id));
     }
 
     // SEARCH FOR A PARTICULAR TERM
     @GetMapping("curriculum/{curriculumId}/term/{termName}")
     @ResponseBody
-    @CrossOrigin
-    public List<Term> searchTerm(@PathVariable("curriculumId") int curId, @PathVariable("termName") String tName) {
-        return termService.searchTerm(curId, tName);
+    public ResponseEntity<List<Term>> searchTerm(@PathVariable("curriculumId") int curId,
+            @PathVariable("termName") String tName) {
+        return ResponseEntity.ok().body(termService.searchTerm(curId, tName));
     }
 
 }

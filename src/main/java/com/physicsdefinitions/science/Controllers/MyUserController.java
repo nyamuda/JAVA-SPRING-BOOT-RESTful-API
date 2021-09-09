@@ -44,7 +44,7 @@ public class MyUserController {
         return ResponseEntity.ok().body(userService.getRoles());
     }
 
-    @PostMapping("/users/save")
+    @PostMapping("/user/save")
     @ResponseBody
     public ResponseEntity<Object> saveUser(@Valid @RequestBody MyUser user) {
 
@@ -62,7 +62,7 @@ public class MyUserController {
 
     }
 
-    @PostMapping("/roles/save")
+    @PostMapping("/role/save")
     @ResponseBody
     @CrossOrigin
     public ResponseEntity<Object> saveRole(@RequestBody Role role) {
@@ -70,7 +70,7 @@ public class MyUserController {
         return ResponseEntity.status(HttpStatus.OK).body("Role added.");
     }
 
-    @PostMapping("/users/add_role")
+    @PostMapping("/user/add_role")
     @ResponseBody
     @CrossOrigin
     public ResponseEntity<Object> addRoleToUser(@RequestBody addRoleToUserData data) {
