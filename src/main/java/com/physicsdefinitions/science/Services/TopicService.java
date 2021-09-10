@@ -28,4 +28,8 @@ public class TopicService {
         return repo.getTopic(topicId);
     }
 
+    public void saveTopic(Topic topic) {
+        repo.save(topic);
+    }
+
 }

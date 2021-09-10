@@ -27,4 +27,8 @@ public class CurriculumService {
         return currRepo.getCurriculum(id);
     }
 
+    public void saveCurriculum(Curriculum curriculum) {
+        currRepo.save(curriculum);
+    }
+
 }

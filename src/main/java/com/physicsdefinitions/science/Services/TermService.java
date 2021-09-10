@@ -4,6 +4,8 @@ package com.physicsdefinitions.science.Services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Repositories.TermRepository;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class TermService {
 
     @Autowired
@@ -34,6 +37,10 @@ public class TermService {
 
     public List<Term> searchTerm(int curriculumId, String termName) {
         return term.searchTerm(curriculumId, termName);
+    }
+
+    public void saveTerm(Term newTerm) {
+        term.save(newTerm);
     }
 
 }

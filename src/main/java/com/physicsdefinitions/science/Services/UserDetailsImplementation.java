@@ -33,7 +33,7 @@ public class UserDetailsImplementation implements UserDetailsService {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         // we loop through the roles of the user and convert each role name to a
         // SimpleGrantedAuthority;
-        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleName())));
+        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
         return new User(user.getUsername(), user.getPassword(), authorities);
 
     }

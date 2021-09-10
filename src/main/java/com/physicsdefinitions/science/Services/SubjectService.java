@@ -27,4 +27,9 @@ public class SubjectService {
     public List<Subject> getAllSubjects(int id) {
         return subRepo.getAllSubjects(id);
     }
+
+    // save a subject
+    public void saveSubject(Subject subject) {
+        subRepo.save(subject);
+    }
 }

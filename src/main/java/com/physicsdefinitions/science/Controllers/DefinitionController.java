@@ -30,10 +30,11 @@ public class DefinitionController {
         return defService.getDefinition(curId, termId);
     }
 
+    // save definition
     @PostMapping("definition/save")
     @ResponseBody
     public ResponseEntity<Object> getDefinition(Definition definition) {
         defService.saveDefinition(definition);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("Definition successfully added.");
     }
 }

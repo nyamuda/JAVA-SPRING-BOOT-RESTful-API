@@ -17,17 +17,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "topics")
 public class Topic {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(unique = true)
+    @NotBlank
     private String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
+    @NotBlank
     private Subject subject;
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "topic_curriculum", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = {

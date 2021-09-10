@@ -70,6 +70,7 @@ public class MyUserController {
         return ResponseEntity.status(HttpStatus.OK).body("Role added.");
     }
 
+    // add role to a
     @PostMapping("/user/add_role")
     @ResponseBody
     @CrossOrigin

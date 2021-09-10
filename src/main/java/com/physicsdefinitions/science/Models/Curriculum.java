@@ -15,14 +15,19 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.JoinColumn;
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "curriculums")
 public class Curriculum {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String curriculumName;
+
+    @Column(unique = true)
+    @NotBlank
+    private String name;
 
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
@@ -33,8 +38,8 @@ public class Curriculum {
     public Curriculum() {
     }
 
-    public String getCurriculumName() {
-        return curriculumName;
+    public String getName() {
+        return name;
     }
 
     public int getId() {
@@ -49,8 +54,8 @@ public class Curriculum {
         this.terms = terms;
     }
 
-    public void setCurriculumName(String curriculumName) {
-        this.curriculumName = curriculumName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setId(int id) {

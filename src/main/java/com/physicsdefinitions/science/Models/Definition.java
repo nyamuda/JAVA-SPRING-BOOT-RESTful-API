@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "definitions")
@@ -15,13 +16,20 @@ public class Definition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank
     private String definition;
+
     private String keywords;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "term_id")
+    @NotBlank
     private Term term;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "curriculum_id")
+    @NotBlank
     private Curriculum curriculum;
 
     public Definition() {

@@ -8,16 +8,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "terms")
 public class Term {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String termName;
+
+    @Column(unique = true)
+    @NotBlank
+    private String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id")
+    @NotBlank
     private Topic topic;
 
     public Term() {
@@ -27,8 +34,8 @@ public class Term {
         return id;
     }
 
-    public String getTermName() {
-        return termName;
+    public String getName() {
+        return name;
     }
 
     public Topic getTopic() {
@@ -39,8 +46,8 @@ public class Term {
         this.id = id;
     }
 
-    public void setTermName(String termName) {
-        this.termName = termName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTopic(Topic topic) {

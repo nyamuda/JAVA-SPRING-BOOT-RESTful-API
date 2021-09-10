@@ -40,7 +40,7 @@ public class MyUserServiceImplementation implements MyUserService {
     @Override
     public void addRoleToUser(String username, String roleName) {
         MyUser user = userRepo.findByUsername(username);
-        Role role = roleRepo.findByRoleName(roleName);
+        Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
 
     }
