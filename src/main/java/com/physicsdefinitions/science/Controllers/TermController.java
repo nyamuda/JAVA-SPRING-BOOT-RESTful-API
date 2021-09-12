@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Services.TermService;
@@ -80,4 +81,36 @@ public class TermController {
 
     }
 
+    @PostMapping("/term/add_curriculum")
+    @ResponseBody
+    public ResponseEntity<Object> addTermCurriculum(@Valid @RequestBody addCurriculumToTerm data) {
+
+        termService.addCurriculumToTerm(data.getTermName(), data.getCurriculumId());
+        return ResponseEntity.status(HttpStatus.OK).body("Curriculum successfully added to term.\n");
+
+    }
+
+}
+
+class addCurriculumToTerm {
+    @NotBlank
+    private String termName;
+    @NotBlank
+    private int curriculumId;
+
+    public int getCurriculumId() {
+        return curriculumId;
+    }
+
+    public String getTermName() {
+        return termName;
+    }
+
+    public void setCurriculumId(int curriculumId) {
+        this.curriculumId = curriculumId;
+    }
+
+    public void setTermName(String termName) {
+        this.termName = termName;
+    }
 }

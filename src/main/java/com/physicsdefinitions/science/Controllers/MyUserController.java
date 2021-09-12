@@ -1,8 +1,6 @@
 package com.physicsdefinitions.science.Controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -49,15 +47,16 @@ public class MyUserController {
     public ResponseEntity<Object> saveUser(@Valid @RequestBody MyUser user) {
 
         try {
+
             userService.saveUser(user);
             return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            Map<String, String> errorInfo = new HashMap<>();
-            Map<String, Map<String, String>> errorBody = new HashMap<>();
-            errorInfo.put("username", "Username has been taken.");
-            errorBody.put("errors", errorInfo);
+            // Map<String, String> errorInfo = new HashMap<>();
+            // Map<String, Map<String, String>> errorBody = new HashMap<>();
+            // errorInfo.put("username", "Username has been taken.");
+            // errorBody.put("errors", errorInfo);
 
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e);
         }
 
     }
@@ -73,7 +72,6 @@ public class MyUserController {
     // add role to a
     @PostMapping("/user/add_role")
     @ResponseBody
-    @CrossOrigin
     public ResponseEntity<Object> addRoleToUser(@RequestBody addRoleToUserData data) {
         userService.addRoleToUser(data.getUsername(), data.getRoleName());
         return ResponseEntity.status(HttpStatus.OK).body("Role added to user.");

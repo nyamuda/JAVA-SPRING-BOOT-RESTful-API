@@ -1,15 +1,22 @@
 package com.physicsdefinitions.science.Models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "terms")
@@ -27,6 +34,12 @@ public class Term {
     @NotBlank
     private Topic topic;
 
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "term_curriculum", joinColumns = { @JoinColumn(name = "term_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "curriculum_id") })
+    private Collection<Curriculum> curriculums = new ArrayList<>();
+
     public Term() {
     }
 
@@ -42,6 +55,10 @@ public class Term {
         return topic;
     }
 
+    public Collection<Curriculum> getCurriculums() {
+        return curriculums;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -52,6 +69,10 @@ public class Term {
 
     public void setTopic(Topic topic) {
         this.topic = topic;
+    }
+
+    public void setCurriculums(Collection<Curriculum> curriculums) {
+        this.curriculums = curriculums;
     }
 
 }

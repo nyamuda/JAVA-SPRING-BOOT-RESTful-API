@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -37,6 +38,11 @@ public class MyUser {
 
     @NotBlank(message = "Second name required.")
     private String secondName;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "curriculum_id")
+    @NotBlank(message = "curriculum ID is required.")
+    private Curriculum curriculum;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
@@ -75,6 +81,14 @@ public class MyUser {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Curriculum getCurriculum() {
+        return curriculum;
+    }
+
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
     }
 
     public void setUsername(String username) {

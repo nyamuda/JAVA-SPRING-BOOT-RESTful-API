@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 @RestController
 public class TopicController {
@@ -57,14 +58,46 @@ public class TopicController {
             topics.saveTopic(topic);
             return ResponseEntity.status(HttpStatus.OK).body("Topic successfully added.\n");
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            Map<String, String> errorInfo = new HashMap<>();
-            Map<String, Map<String, String>> errorBody = new HashMap<>();
-            errorInfo.put("topic", "Topic already exists.");
-            errorBody.put("errors", errorInfo);
+            // Map<String, String> errorInfo = new HashMap<>();
+            // Map<String, Map<String, String>> errorBody = new HashMap<>();
+            // errorInfo.put("topic", "Topic already exists.");
+            // errorBody.put("errors", errorInfo);
 
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody);
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e);
         }
 
+    }
+
+    @PostMapping("/topic/add_curriculum")
+    @ResponseBody
+    public ResponseEntity<Object> addCurriculum(@Valid @RequestBody addCurriculumToTopic data) {
+
+        topics.addCurriculumToTopic(data.getTopicName(), data.getCurriculumId());
+        return ResponseEntity.status(HttpStatus.OK).body("Curriculum successfully added to topic.\n");
+    }
+
+}
+
+class addCurriculumToTopic {
+    @NotBlank
+    private String topicName;
+    @NotBlank
+    private int curriculumId;
+
+    public int getCurriculumId() {
+        return curriculumId;
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setCurriculumId(int curriculumId) {
+        this.curriculumId = curriculumId;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
     }
 
 }

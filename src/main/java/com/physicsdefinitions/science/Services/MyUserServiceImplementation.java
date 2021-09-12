@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
+import com.physicsdefinitions.science.Repositories.CurriculumRepository;
 import com.physicsdefinitions.science.Repositories.MyUserRepo;
 import com.physicsdefinitions.science.Repositories.RoleRepository;
 
@@ -22,15 +24,33 @@ public class MyUserServiceImplementation implements MyUserService {
     private RoleRepository roleRepo;
     private PasswordEncoder passwordEncoder;
 
-    public MyUserServiceImplementation(MyUserRepo userRepo, RoleRepository roleRepo, PasswordEncoder passwordEncoder) {
+    @Autowired
+    private CurriculumRepository currRepo;
+
+    public MyUserServiceImplementation(MyUserRepo userRepo, RoleRepository roleRepo, PasswordEncoder passwordEncoder,
+            CurriculumRepository currRepo) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
         this.passwordEncoder = passwordEncoder;
+        this.currRepo = currRepo;
     }
 
     @Override
     public void saveUser(MyUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        // getting the get of the curriculum selected by the user.
+
+        int id = user.getCurriculum().getId();
+
+        // the get the curriculum
+
+        Curriculum curr = currRepo.getById(id);
+
+        // add the curriculum to the user
+
+        user.setCurriculum(curr);
+
         userRepo.save(user);
         // adding a default role to the user-->USER
         addRoleToUser(user.getUsername(), "USER");

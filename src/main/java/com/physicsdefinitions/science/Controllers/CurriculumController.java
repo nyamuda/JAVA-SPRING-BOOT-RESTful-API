@@ -3,7 +3,6 @@ package com.physicsdefinitions.science.Controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -39,7 +38,7 @@ public class CurriculumController {
     // GET A PARTICULAR CURRICULUM
     @GetMapping("curriculum/{id}")
     @ResponseBody
-    public ResponseEntity<Optional<Curriculum>> getCurriculum(@PathVariable("id") int id) {
+    public ResponseEntity<Curriculum> getCurriculum(@PathVariable("id") int id) {
         return ResponseEntity.ok().body(currService.getCurriculum(id));
     }
 
@@ -50,7 +49,7 @@ public class CurriculumController {
 
         try {
             currService.saveCurriculum(curriculum);
-            return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
+            return ResponseEntity.status(HttpStatus.OK).body("Curriculum successfully added.\n");
         } catch (org.springframework.dao.DataIntegrityViolationException e) {
             Map<String, String> errorInfo = new HashMap<>();
             Map<String, Map<String, String>> errorBody = new HashMap<>();

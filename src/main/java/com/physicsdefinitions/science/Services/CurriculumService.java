@@ -1,7 +1,6 @@
 package com.physicsdefinitions.science.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Repositories.CurriculumRepository;
@@ -23,7 +22,7 @@ public class CurriculumService {
         return currRepo.findAll();
     }
 
-    public Optional<Curriculum> getCurriculum(int id) {
+    public Curriculum getCurriculum(int id) {
         return currRepo.getCurriculum(id);
     }
 

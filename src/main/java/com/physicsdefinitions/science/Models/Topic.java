@@ -1,7 +1,7 @@
 package com.physicsdefinitions.science.Models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -32,7 +32,7 @@ public class Topic {
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", nullable = false)
     @NotBlank
     private Subject subject;
 
@@ -40,7 +40,7 @@ public class Topic {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "topic_curriculum", joinColumns = { @JoinColumn(name = "topic_id") }, inverseJoinColumns = {
             @JoinColumn(name = "curriculum_id") })
-    private Set<Curriculum> curriculums = new HashSet<Curriculum>();
+    private List<Curriculum> curriculums = new ArrayList<>();
 
     public Topic() {
     }
@@ -61,11 +61,11 @@ public class Topic {
         this.name = name;
     }
 
-    public Set<Curriculum> getCurriculums() {
+    public List<Curriculum> getCurriculums() {
         return curriculums;
     }
 
-    public void setCurriculums(Set<Curriculum> curriculums) {
+    public void setCurriculums(List<Curriculum> curriculums) {
         this.curriculums = curriculums;
     }
 
