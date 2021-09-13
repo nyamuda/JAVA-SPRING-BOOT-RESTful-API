@@ -2,6 +2,7 @@ package com.physicsdefinitions.science.Services;
 
 import java.util.List;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Repositories.CurriculumRepository;
 
@@ -23,11 +24,15 @@ public class CurriculumService {
     }
 
     public Curriculum getCurriculum(int id) {
-        return currRepo.getCurriculum(id);
+        return currRepo.findById(id).orElseThrow(() -> new ApiException("curriculum with id " + id + " not found."));
     }
 
     public void saveCurriculum(Curriculum curriculum) {
-        currRepo.save(curriculum);
+        try {
+            currRepo.save(curriculum);
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 
 }

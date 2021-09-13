@@ -1,10 +1,7 @@
 
 package com.physicsdefinitions.science.Controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -51,7 +48,7 @@ public class TermController {
     // TO GET A PARTICULAR TERM
     @GetMapping("/term/{id}")
     @ResponseBody
-    public ResponseEntity<Optional<Term>> getTerm(@PathVariable("id") int id) {
+    public ResponseEntity<Term> getTerm(@PathVariable("id") int id) {
         return ResponseEntity.ok().body(termService.getTerm(id));
     }
 
@@ -67,18 +64,8 @@ public class TermController {
     @ResponseBody
     public ResponseEntity<Object> saveTerm(@Valid @RequestBody Term term) {
 
-        try {
-            termService.saveTerm(term);
-            return ResponseEntity.status(HttpStatus.OK).body("Term successfully added.\n");
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            Map<String, String> errorInfo = new HashMap<>();
-            Map<String, Map<String, String>> errorBody = new HashMap<>();
-            errorInfo.put("term", "Term already exists.");
-            errorBody.put("errors", errorInfo);
-
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody);
-        }
-
+        termService.saveTerm(term);
+        return ResponseEntity.status(HttpStatus.OK).body("Term successfully added.\n");
     }
 
     @PostMapping("/term/add_curriculum")

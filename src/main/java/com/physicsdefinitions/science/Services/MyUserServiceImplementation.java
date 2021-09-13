@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
@@ -37,23 +38,27 @@ public class MyUserServiceImplementation implements MyUserService {
 
     @Override
     public void saveUser(MyUser user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        // getting the get of the curriculum selected by the user.
+            // getting the get of the curriculum selected by the user.
 
-        int id = user.getCurriculum().getId();
+            int id = user.getCurriculum().getId();
 
-        // the get the curriculum
+            // the get the curriculum
 
-        Curriculum curr = currRepo.getById(id);
+            Curriculum curr = currRepo.getById(id);
 
-        // add the curriculum to the user
+            // add the curriculum to the user
 
-        user.setCurriculum(curr);
+            user.setCurriculum(curr);
 
-        userRepo.save(user);
-        // adding a default role to the user-->USER
-        addRoleToUser(user.getUsername(), "USER");
+            userRepo.save(user);
+            // adding a default role to the user-->USER
+            addRoleToUser(user.getUsername(), "USER");
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
 
     }
 
@@ -78,8 +83,12 @@ public class MyUserServiceImplementation implements MyUserService {
 
     @Override
     public void saveRole(Role role) {
-        roleRepo.save(role);
+        try {
+            roleRepo.save(role);
 
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 
 }

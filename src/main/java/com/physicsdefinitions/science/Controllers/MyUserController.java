@@ -46,18 +46,8 @@ public class MyUserController {
     @ResponseBody
     public ResponseEntity<Object> saveUser(@Valid @RequestBody MyUser user) {
 
-        try {
-
-            userService.saveUser(user);
-            return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            // Map<String, String> errorInfo = new HashMap<>();
-            // Map<String, Map<String, String>> errorBody = new HashMap<>();
-            // errorInfo.put("username", "Username has been taken.");
-            // errorBody.put("errors", errorInfo);
-
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e);
-        }
+        userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
 
     }
 

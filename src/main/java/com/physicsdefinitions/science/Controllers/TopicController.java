@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+// import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -45,7 +44,7 @@ public class TopicController {
 
     @GetMapping("topic/{topicId}")
     @ResponseBody
-    public ResponseEntity<Optional<Topic>> getTopic(@PathVariable("topicId") int topId) {
+    public ResponseEntity<Topic> getTopic(@PathVariable("topicId") int topId) {
         return ResponseEntity.ok().body(topics.getTopic(topId));
     }
 
@@ -53,18 +52,8 @@ public class TopicController {
     @PostMapping("/topic/save")
     @ResponseBody
     public ResponseEntity<Object> saveTopic(@Valid @RequestBody Topic topic) {
-
-        try {
-            topics.saveTopic(topic);
-            return ResponseEntity.status(HttpStatus.OK).body("Topic successfully added.\n");
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            // Map<String, String> errorInfo = new HashMap<>();
-            // Map<String, Map<String, String>> errorBody = new HashMap<>();
-            // errorInfo.put("topic", "Topic already exists.");
-            // errorBody.put("errors", errorInfo);
-
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e);
-        }
+        topics.saveTopic(topic);
+        return ResponseEntity.status(HttpStatus.OK).body("Topic successfully added.\n");
 
     }
 

@@ -4,6 +4,8 @@ package com.physicsdefinitions.science.Repositories;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import com.physicsdefinitions.science.Models.Term;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Transactional
 public interface TermRepository extends JpaRepository<Term, Integer> {
 
     // GET TERMS FOR PARTICULAR SUBJECT AND CURRICULUM

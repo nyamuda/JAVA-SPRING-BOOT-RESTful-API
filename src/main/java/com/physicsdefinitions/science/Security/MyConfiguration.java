@@ -39,9 +39,9 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/user/save").permitAll()
                 .antMatchers("/curriculum**").permitAll().antMatchers("/subject**").permitAll().antMatchers("/topic**")
-                .hasAnyAuthority("USER", "ADMIN").antMatchers("/term**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/topic**").permitAll().antMatchers("/users").permitAll().antMatchers("/role**")
-                .hasAuthority("ADMIN").antMatchers("/user/add_role").permitAll();
+                .hasAnyAuthority("USER", "ADMIN").antMatchers("/term**").permitAll().antMatchers("/topic**").permitAll()
+                .antMatchers("/users").permitAll().antMatchers("/role**").hasAuthority("ADMIN")
+                .antMatchers("/user/add_role").permitAll();
         http.csrf().disable();
         http.formLogin().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

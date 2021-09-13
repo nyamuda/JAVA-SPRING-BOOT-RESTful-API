@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+// import java.util.Optional;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Models.Subject;
 import com.physicsdefinitions.science.Models.Topic;
@@ -34,24 +35,32 @@ public class TopicService {
         return repo.getSubjectTopics(subjectId, curriculumId);
     }
 
-    public Optional<Topic> getTopic(int topicId) {
-        return repo.getTopic(topicId);
+    public Topic getTopic(int topicId) {
+        return repo.findById(topicId).orElseThrow(() -> new ApiException("topic with id:" + topicId + " not found."));
     }
 
     public void saveTopic(Topic topic) {
-        // getting the subject with the given id
-        Subject subject = subRepo.getById(topic.getSubject().getId());
-        // saving the subject to the topic
-        topic.setSubject(subject);
+        try {
+            // getting the subject with the given id
+            Subject subject = subRepo.getById(topic.getSubject().getId());
+            // saving the subject to the topic
+            topic.setSubject(subject);
 
-        // saving the topic
-        repo.save(topic);
+            // saving the topic
+            repo.save(topic);
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 
     public void addCurriculumToTopic(String topicName, int currId) {
-        Topic topic = repo.findByName(topicName);
-        Curriculum curriculum = currRepo.getCurriculum(currId);
-        topic.getCurriculums().add(curriculum);
+        try {
+            Topic topic = repo.findByName(topicName);
+            Curriculum curriculum = currRepo.getCurriculum(currId);
+            topic.getCurriculums().add(curriculum);
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
 
     }
 

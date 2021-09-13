@@ -1,8 +1,8 @@
 package com.physicsdefinitions.science.Services;
 
 import java.util.List;
-import java.util.Optional;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Subject;
 import com.physicsdefinitions.science.Repositories.SubjectRepository;
 
@@ -19,8 +19,8 @@ public class SubjectService {
     }
 
     // get a subject
-    public Optional<Subject> getSubject(int id) {
-        return subRepo.getSubject(id);
+    public Subject getSubject(int id) {
+        return subRepo.findById(id).orElseThrow(() -> new ApiException("subject with id:" + id + " not found."));
     }
 
     // get all subjects for a particular curriculum
@@ -30,6 +30,10 @@ public class SubjectService {
 
     // save a subject
     public void saveSubject(Subject subject) {
-        subRepo.save(subject);
+        try {
+            subRepo.save(subject);
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 }

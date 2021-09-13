@@ -2,10 +2,10 @@
 package com.physicsdefinitions.science.Services;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Models.Term;
 import com.physicsdefinitions.science.Models.Topic;
@@ -41,8 +41,8 @@ public class TermService {
         return term.getTermsForTopic(curriculumId, topicId);
     }
 
-    public Optional<Term> getTerm(int id) {
-        return term.getTerm(id);
+    public Term getTerm(int id) {
+        return term.findById(id).orElseThrow(() -> new ApiException("term with id:" + id + " not found."));
     }
 
     public List<Term> searchTerm(int curriculumId, String termName) {
@@ -51,18 +51,27 @@ public class TermService {
 
     public void saveTerm(Term newTerm) {
 
-        // getting the topic with the given id
-        Topic topic = topicRepository.getById(newTerm.getTopic().getId());
-        // saving the topic to the term
-        newTerm.setTopic(topic);
-        // saving the term to the database
-        term.save(newTerm);
+        try {
+            // getting the topic with the given id
+            Topic topic = topicRepository.getById(newTerm.getTopic().getId());
+            // saving the topic to the term
+            newTerm.setTopic(topic);
+            // saving the term to the database
+            term.save(newTerm);
+
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 
     public void addCurriculumToTerm(String termName, int curriculumId) {
-        Term myTerm = term.findByName(termName);
-        Curriculum curriculum = currRepo.getById(curriculumId);
-        myTerm.getCurriculums().add(curriculum);
+        try {
+            Term myTerm = term.findByName(termName);
+            Curriculum curriculum = currRepo.getById(curriculumId);
+            myTerm.getCurriculums().add(curriculum);
+        } catch (Exception e) {
+            throw new ApiException(e.getLocalizedMessage());
+        }
     }
 
 }
