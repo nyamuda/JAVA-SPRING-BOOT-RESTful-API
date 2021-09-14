@@ -39,23 +39,33 @@ public class MyUserServiceImplementation implements MyUserService {
     @Override
     public void saveUser(MyUser user) {
         try {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            MyUser checkUser = userRepo.findByUsername(user.getUsername());
+            // checking if the user already exists
+            if (checkUser != null && user.getUsername().equalsIgnoreCase(checkUser.getUsername())) {
+                throw new ApiException("Username already exists.");
+            } else {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-            // getting the get of the curriculum selected by the user.
+                // getting the id of the curriculum selected by the user.
 
-            int id = user.getCurriculum().getId();
+                if (user.getCurriculum().getId() == 0) {
+                    throw new ApiException("Curriculum id required.");
+                }
 
-            // the get the curriculum
+                int id = user.getCurriculum().getId();
 
-            Curriculum curr = currRepo.getById(id);
+                // the get the curriculum
 
-            // add the curriculum to the user
+                Curriculum curr = currRepo.getById(id);
 
-            user.setCurriculum(curr);
+                // add the curriculum to the user
 
-            userRepo.save(user);
-            // adding a default role to the user-->USER
-            addRoleToUser(user.getUsername(), "USER");
+                user.setCurriculum(curr);
+
+                userRepo.save(user);
+                // adding a default role to the user-->USER
+                addRoleToUser(user.getUsername(), "USER");
+            }
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());
         }
@@ -84,7 +94,13 @@ public class MyUserServiceImplementation implements MyUserService {
     @Override
     public void saveRole(Role role) {
         try {
-            roleRepo.save(role);
+            // checking if the role already exists
+            Role roleCheck = roleRepo.findByName(role.getName());
+            if (roleCheck != null && role.getName().equalsIgnoreCase(roleCheck.getName())) {
+                throw new ApiException("Role already exists.");
+            } else {
+                roleRepo.save(role);
+            }
 
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());

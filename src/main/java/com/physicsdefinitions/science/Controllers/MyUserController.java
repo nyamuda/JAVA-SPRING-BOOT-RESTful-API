@@ -45,7 +45,6 @@ public class MyUserController {
     @PostMapping("/user/save")
     @ResponseBody
     public ResponseEntity<Object> saveUser(@Valid @RequestBody MyUser user) {
-
         userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.OK).body("User successfully added.\n");
 
