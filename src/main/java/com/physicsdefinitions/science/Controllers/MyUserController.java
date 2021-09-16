@@ -3,6 +3,7 @@ package com.physicsdefinitions.science.Controllers;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
@@ -61,7 +62,7 @@ public class MyUserController {
     // add role to a
     @PostMapping("/user/add_role")
     @ResponseBody
-    public ResponseEntity<Object> addRoleToUser(@RequestBody addRoleToUserData data) {
+    public ResponseEntity<Object> addRoleToUser(@Valid @RequestBody addRoleToUserData data) {
         userService.addRoleToUser(data.getUsername(), data.getRoleName());
         return ResponseEntity.status(HttpStatus.OK).body("Role added to user.");
     }
@@ -69,7 +70,9 @@ public class MyUserController {
 }
 
 class addRoleToUserData {
+    @NotBlank(message = "Username field is required.")
     private String username;
+    @NotBlank(message = "Role name field is required.")
     private String roleName;
 
     public addRoleToUserData() {

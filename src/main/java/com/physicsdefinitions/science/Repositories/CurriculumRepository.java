@@ -12,4 +12,6 @@ public interface CurriculumRepository extends JpaRepository<Curriculum, Integer>
     @Query(value = "SELECT * FROM curriculums c WHERE c.id=?1", nativeQuery = true)
     public Curriculum getCurriculum(int id);
 
+    public Curriculum findByName(String name);
+
 }

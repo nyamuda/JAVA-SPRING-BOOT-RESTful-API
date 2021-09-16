@@ -19,7 +19,7 @@ public class Role {
     private int id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "Role name is required.")
     private String name;
 
     public Role() {

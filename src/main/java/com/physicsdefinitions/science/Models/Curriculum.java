@@ -7,17 +7,18 @@ import javax.persistence.Id;
 
 import javax.persistence.Table;
 import javax.persistence.Column;
+
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "curriculums")
 public class Curriculum {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank(message = "Curriculum name is required.")
     @Column(unique = true)
-    @NotBlank
     private String name;
 
     public Curriculum() {

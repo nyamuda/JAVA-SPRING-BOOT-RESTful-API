@@ -42,7 +42,8 @@ public class TermService {
     }
 
     public Term getTerm(int id) {
-        return term.findById(id).orElseThrow(() -> new ApiException("term with id:" + id + " not found."));
+        return term.findById(id).orElseThrow(() -> new ApiException("Term not found."));
+
     }
 
     public List<Term> searchTerm(int curriculumId, String termName) {
@@ -52,12 +53,23 @@ public class TermService {
     public void saveTerm(Term newTerm) {
 
         try {
-            // getting the topic with the given id
-            Topic topic = topicRepository.getById(newTerm.getTopic().getId());
-            // saving the topic to the term
-            newTerm.setTopic(topic);
-            // saving the term to the database
-            term.save(newTerm);
+            // first checking if the term already exists.
+            Term termCheck = term.findByName(newTerm.getName());
+
+            if (termCheck != null && newTerm.getName().equalsIgnoreCase(termCheck.getName())) {
+                throw new ApiException("Term already exists.");
+            } else {
+                // if topic id was not provided, wwe throw an error.
+                if (newTerm.getTopic() == null || newTerm.getTopic().getId() == 0) {
+                    throw new ApiException("Topic field is required.");
+                }
+                // getting the topic with the given id
+                Topic topic = topicRepository.getById(newTerm.getTopic().getId());
+                // saving the topic to the term
+                newTerm.setTopic(topic);
+                // saving the term to the database
+                term.save(newTerm);
+            }
 
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());

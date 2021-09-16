@@ -28,12 +28,11 @@ public class Topic {
     private int id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "Topic name is required.")
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id", nullable = false)
-    @NotBlank
     private Subject subject;
 
     @JsonIgnore

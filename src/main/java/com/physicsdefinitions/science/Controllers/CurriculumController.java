@@ -1,8 +1,6 @@
 package com.physicsdefinitions.science.Controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@org.springframework.validation.annotation.Validated
 public class CurriculumController {
     @Autowired
     private CurriculumService currService;
@@ -47,17 +46,8 @@ public class CurriculumController {
     @ResponseBody
     public ResponseEntity<Object> saveCurriculum(@Valid @RequestBody Curriculum curriculum) {
 
-        try {
-            currService.saveCurriculum(curriculum);
-            return ResponseEntity.status(HttpStatus.OK).body("Curriculum successfully added.\n");
-        } catch (org.springframework.dao.DataIntegrityViolationException e) {
-            Map<String, String> errorInfo = new HashMap<>();
-            Map<String, Map<String, String>> errorBody = new HashMap<>();
-            errorInfo.put("curriculum", "Curriculum already exists.");
-            errorBody.put("errors", errorInfo);
-
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorBody);
-        }
+        currService.saveCurriculum(curriculum);
+        return ResponseEntity.status(HttpStatus.OK).body("Curriculum successfully added.\n");
 
     }
 

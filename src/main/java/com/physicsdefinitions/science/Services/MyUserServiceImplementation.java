@@ -42,16 +42,18 @@ public class MyUserServiceImplementation implements MyUserService {
             MyUser checkUser = userRepo.findByUsername(user.getUsername());
             // checking if the user already exists
             if (checkUser != null && user.getUsername().equalsIgnoreCase(checkUser.getUsername())) {
-                throw new ApiException("Username already exists.");
+                throw new ApiException("Username is taken.");
             } else {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-                // getting the id of the curriculum selected by the user.
+                // checking if the foreign key object and the object property "id" for
+                // curriculum was provided else we throw an error
 
-                if (user.getCurriculum().getId() == 0) {
-                    throw new ApiException("Curriculum id required.");
+                if (user.getCurriculum() == null || user.getCurriculum().getId() == 0) {
+                    throw new ApiException("Curriculum field is required.");
                 }
 
+                // getting the id of the curriculum selected by the user.
                 int id = user.getCurriculum().getId();
 
                 // the get the curriculum

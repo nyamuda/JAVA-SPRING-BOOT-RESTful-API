@@ -80,9 +80,9 @@ public class TermController {
 }
 
 class addCurriculumToTerm {
-    @NotBlank
+    @NotBlank(message = "Term name field is required")
     private String termName;
-    @NotBlank
+    @NotBlank(message = "Curriculum field is required.")
     private int curriculumId;
 
     public int getCurriculumId() {

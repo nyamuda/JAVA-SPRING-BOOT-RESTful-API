@@ -24,12 +24,18 @@ public class CurriculumService {
     }
 
     public Curriculum getCurriculum(int id) {
-        return currRepo.findById(id).orElseThrow(() -> new ApiException("curriculum with id " + id + " not found."));
+        return currRepo.findById(id).orElseThrow(() -> new ApiException("curriculum not found."));
     }
 
     public void saveCurriculum(Curriculum curriculum) {
         try {
-            currRepo.save(curriculum);
+            // checking if teh curriculum already exists.
+            Curriculum checkCurriculum = currRepo.findByName(curriculum.getName());
+            if (checkCurriculum != null && curriculum.getName().equalsIgnoreCase(checkCurriculum.getName())) {
+                throw new ApiException("Curriculum already exists.");
+            } else {
+                currRepo.save(curriculum);
+            }
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());
         }

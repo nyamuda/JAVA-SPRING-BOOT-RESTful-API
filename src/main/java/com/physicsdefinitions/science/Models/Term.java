@@ -26,12 +26,12 @@ public class Term {
     private int id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "Term name is required.")
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "topic_id")
-    @NotBlank
+    // @NotBlank
     private Topic topic;
 
     @JsonIgnore

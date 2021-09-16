@@ -16,7 +16,7 @@ public class Subject {
     private int id;
 
     @Column(unique = true)
-    @NotBlank
+    @NotBlank(message = "Subject name is required.")
     private String name;
 
     public Subject() {

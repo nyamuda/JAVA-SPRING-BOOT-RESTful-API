@@ -20,7 +20,7 @@ public class SubjectService {
 
     // get a subject
     public Subject getSubject(int id) {
-        return subRepo.findById(id).orElseThrow(() -> new ApiException("subject with id:" + id + " not found."));
+        return subRepo.findById(id).orElseThrow(() -> new ApiException("Subject not found."));
     }
 
     // get all subjects for a particular curriculum
@@ -31,7 +31,13 @@ public class SubjectService {
     // save a subject
     public void saveSubject(Subject subject) {
         try {
-            subRepo.save(subject);
+            // checking if the subject already exists
+            Subject checkSubject = subRepo.findByName(subject.getName());
+            if (checkSubject != null && subject.getName().equalsIgnoreCase(checkSubject.getName())) {
+                throw new ApiException("Subject already exists.");
+            } else {
+                subRepo.save(subject);
+            }
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());
         }

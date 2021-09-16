@@ -19,4 +19,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     @Query(value = "SELECT DISTINCT s.name, s.id FROM subjects s JOIN topics t on s.id=t.subject_id JOIN topic_curriculum tc ON t.id=tc.topic_id WHERE tc.curriculum_id=?1", nativeQuery = true)
     public List<Subject> getAllSubjects(int id);
 
+    public Subject findByName(String name);
+
 }

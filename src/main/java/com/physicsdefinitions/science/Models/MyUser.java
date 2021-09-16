@@ -25,23 +25,23 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Username required.")
+    @NotBlank(message = "Username is required.")
     @Column(unique = true)
     private String username;
 
-    @NotBlank(message = "Password required.")
+    @NotBlank(message = "Password  is required.")
     @Size(min = 8, message = "The password must contain a minimum of 8 characters.")
     private String password;
 
-    @NotBlank(message = "First name required.")
+    @NotBlank(message = "First name is required.")
     private String firstName;
 
-    @NotBlank(message = "Second name required.")
+    @NotBlank(message = "Second name is required.")
     private String secondName;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "curriculum_id")
-    @NotBlank(message = "curriculum ID is required.")
+    // @NotBlank(message = "curriculum ID is required.")
     private Curriculum curriculum;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

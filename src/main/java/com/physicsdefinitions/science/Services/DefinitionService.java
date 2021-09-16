@@ -1,9 +1,6 @@
 package com.physicsdefinitions.science.Services;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
-
 import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.Curriculum;
 import com.physicsdefinitions.science.Models.Definition;
@@ -33,13 +30,23 @@ public class DefinitionService {
     }
 
     // getting the definition of a term of a particular curriculum
-    public Optional<Definition> getDefinition(int curriculumId, int termId) {
-        return defRepo.getDefinition(curriculumId, termId);
+    public Definition getDefinition(int curriculumId, int termId) {
+        return defRepo.getDefinition(curriculumId, termId).orElseThrow(() -> new ApiException("Definition not found."));
     }
 
     // save definition
     public void saveDefinition(Definition definition) {
         try {
+            // checking if the foreign key object and the property term id was provided else
+            // we throw an error.
+            if (definition.getTerm() == null || definition.getTerm().getId() == 0) {
+                throw new ApiException("Term field is required.");
+            }
+            // checking if the foreign key key object and the property curriculum id was
+            // provided else we throw an error.
+            if (definition.getCurriculum() == null || definition.getCurriculum().getId() == 0) {
+                throw new ApiException("Curriculum field is required.");
+            }
             // getting the term with the given id
             Term term = termRepository.getById(definition.getTerm().getId());
             // getting the curriculum with the given id

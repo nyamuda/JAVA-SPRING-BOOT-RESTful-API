@@ -36,18 +36,28 @@ public class TopicService {
     }
 
     public Topic getTopic(int topicId) {
-        return repo.findById(topicId).orElseThrow(() -> new ApiException("topic with id:" + topicId + " not found."));
+        return repo.findById(topicId).orElseThrow(() -> new ApiException("Topic not found."));
     }
 
     public void saveTopic(Topic topic) {
         try {
-            // getting the subject with the given id
-            Subject subject = subRepo.getById(topic.getSubject().getId());
-            // saving the subject to the topic
-            topic.setSubject(subject);
+            // checking if the topic already exists
+            Topic checkTopic = repo.findByName(topic.getName());
+            if (checkTopic != null && topic.getName().equalsIgnoreCase(checkTopic.getName())) {
+                throw new ApiException("Topic already exists.");
+            } else {
+                // checking iff the foreign key object and the property subject id was provided
+                if (topic.getSubject() == null || topic.getSubject().getId() == 0) {
+                    throw new ApiException("Subject field is required.");
+                }
+                // getting the subject with the given id
+                Subject subject = subRepo.getById(topic.getSubject().getId());
+                // saving the subject to the topic
+                topic.setSubject(subject);
 
-            // saving the topic
-            repo.save(topic);
+                // saving the topic
+                repo.save(topic);
+            }
         } catch (Exception e) {
             throw new ApiException(e.getLocalizedMessage());
         }

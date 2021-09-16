@@ -17,19 +17,19 @@ public class Definition {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank
+    @NotBlank(message = "Definition field is required.")
     private String definition;
 
     private String keywords;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "term_id")
-    @NotBlank
+    // @NotBlank(message = "term required.")
     private Term term;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "curriculum_id")
-    @NotBlank
+    @JoinColumn(name = "curriculum_id.")
+    // @NotBlank(message = "curriculum required.")
     private Curriculum curriculum;
 
     public Definition() {
