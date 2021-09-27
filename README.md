@@ -75,3 +75,14 @@ Once the user logs in, the API will send a token(lasts for 24hrs) that the user 
 5. To get the definition of a term:</br>
 <code>curriculum/{curriculumId}/term/{termId}/definition</code>
 
+<h2>Exceptions</h2>
+All exceptions will send the error in the following format:</br>
+<code>
+{"error":"Error Message"}
+</code></br>
+For instance, if your try register with a username that already exists in the database, you will get the following error:</br>
+<code>
+ {
+    "error": "Username is taken."
+}
+</code>
