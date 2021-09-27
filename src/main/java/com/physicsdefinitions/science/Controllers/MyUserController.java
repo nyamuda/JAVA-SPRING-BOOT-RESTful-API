@@ -58,7 +58,8 @@ public class MyUserController {
         if (user == null) {
             throw new ApiException("User not found.");
         }
-        return ResponseEntity.ok().body(user.getUsername());
+        return ResponseEntity.ok()
+                .body(new viewUserForm(user.getId(), user.getFirstName(), user.getSecondName(), user.getUsername()));
     }
 
     @PostMapping("/user/save")
@@ -107,6 +108,56 @@ class addRoleToUserData {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+}
+
+class viewUserForm {
+    int id;
+    String firstName;
+    String secondName;
+    String username;
+
+    public viewUserForm() {
+
+    }
+
+    public viewUserForm(int id, String firstName, String secondName, String username) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.username = username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public void setUsername(String username) {

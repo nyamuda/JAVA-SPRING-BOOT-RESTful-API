@@ -37,11 +37,20 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/user/save").permitAll()
-                .antMatchers("/curriculum**").permitAll().antMatchers("/subject**").permitAll().antMatchers("/topic**")
-                .hasAnyAuthority("USER", "ADMIN").antMatchers("/term**").permitAll().antMatchers("/topic**").permitAll()
-                .antMatchers("/users").permitAll().antMatchers("/role**").hasAuthority("ADMIN")
-                .antMatchers("/user/add_role").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll()
+                // ADMIN ROUTES
+                .antMatchers("/user/save").permitAll().antMatchers("/curriculum/save").hasAuthority("ADMIN")
+                .antMatchers("/subject/save").hasAuthority("ADMIN").antMatchers("/topic/save").hasAuthority("ADMIN")
+                .antMatchers("/topic/add_curriculum").hasAuthority("ADMIN").antMatchers("/term/save")
+                .hasAuthority("ADMIN").antMatchers("term/add_curriculum").hasAuthority("ADMIN")
+                .antMatchers("definition/save").hasAuthority("ADMIN").antMatchers("/role/save").hasAuthority("ADMIN")
+                .antMatchers("/user/add_role").hasAuthority("ADMIN").antMatchers("/users").hasAuthority("ADMIN")
+                .antMatchers("/roles").hasAuthority("ADMIN")
+                // USER ROUTES
+                .antMatchers("/curriculum**").hasAuthority("USER").antMatchers("/subject**").hasAuthority("USER")
+                .antMatchers("term**").hasAuthority("USER").antMatchers("/definition**").hasAuthority("USER")
+                .antMatchers("user/{username}").hasAuthority("USER");
+
         http.csrf().disable();
         http.formLogin().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
