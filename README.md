@@ -88,3 +88,65 @@ For instance, if your try register with a username that already exists in the da
 </code>
 
 <h2>Admin Side</h2>
+To access the admin routes, use the following credentials to login:</br>
+<code>
+ {"username":"admin",
+ "password":"password"}
+</code></br>
+Once you log in and receive the the token, you can then use the token to access the admin routes.</br>
+
+<h3>Admin Routes</h3>
+
+<h4>Curriculums</h4>
+1. To save the a curriculum:</br>
+<code>/curriculum/save</code></br>
+<code>{"name":"Curriculum Name"}</code></br>
+
+
+<h4>Subjects</h4>
+1. To save the a subject:</br>
+<code>/subject/save</code></br>
+<code>{"name":"Subject Name"}</code></br>
+
+
+<h4>Topics</h4>
+1. To save a topic:</br>
+<code>/topic/save</code></br>
+<code>{"name":"Topic Name"}</code></br>
+//Once you add a topic you should also add the curriculum the topic is under
+2. To add a curriculum to a topic:</br>
+<code>/topic/add_curriculum</code></br>
+<code>{
+ "topicName":"Topic Name",
+ "curriculumId":"Id of curriculum"
+ }</code></br>
+ 
+ <h4>Terms</h4>
+1. To save a term:</br>
+<code>/term/save</code></br>
+<code>{"name":"Topic Name"}</code></br>
+//Once you add a term you should also add the curriculum the term is under
+2. To add a curriculum to a topic:</br>
+<code>//term/add_curriculum</code></br>
+<code>{
+ "termName":"Topic Name",
+ "curriculumId":"Id of curriculum"
+ }</code></br>
+ 
+ 
+ <h4>Definitions</h4>
+1. To save a definition:</br>
+<code>definition/save</code></br>
+<code>{"definitiin":"the definition",
+ "keyword":"keywords of the definition",
+ "term":{
+ "id":"id of the term the definition is for"
+ },
+ "curriculum":{
+ "id":"id of the curriculum the definition is for"
+ }
+ }</code></br>
+
+
+
+
