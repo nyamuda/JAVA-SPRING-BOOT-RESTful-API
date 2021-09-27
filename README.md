@@ -9,6 +9,7 @@ New terms are still being added to the database. So there aren't a lot of terms 
 
 <h2>Screenshots</h2> 
 The structure of the database is as follows:
+<image src="">
 
 <h2>Tech/Framework used</h2>
 Java, Spring Boot, Hibernate & MySQL.
