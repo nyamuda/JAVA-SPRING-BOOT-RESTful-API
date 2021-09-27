@@ -17,7 +17,7 @@ The API uses JSON Web Tokens for authentication and authorization.
 
 <h2>How to Use?</h2>
  Register:</br>
- <code>/register</code></br>
+ <code>/user/save</code></br>
  Login:</br>
  <code>/login</code></br>
 To use the API, the user needs register first and the following fields are required:</br>
