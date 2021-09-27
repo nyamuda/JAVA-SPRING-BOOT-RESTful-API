@@ -86,3 +86,5 @@ For instance, if your try register with a username that already exists in the da
     "error": "Username is taken."
 }
 </code>
+
+<h2>Admin Side</h2>
