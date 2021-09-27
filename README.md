@@ -113,7 +113,7 @@ Once you log in and receive the the token, you can then use the token to access 
 1. To save a topic:</br>
 <code>/topic/save</code></br>
 <code>{"name":"Topic Name"}</code></br>
-//Once you add a topic you should also add the curriculum the topic is under
+//Once you add a topic, you should also add the curriculum the topic is under
 2. To add a curriculum to a topic:</br>
 <code>/topic/add_curriculum</code></br>
 <code>{
@@ -125,7 +125,7 @@ Once you log in and receive the the token, you can then use the token to access 
 1. To save a term:</br>
 <code>/term/save</code></br>
 <code>{"name":"Topic Name"}</code></br>
-//Once you add a term you should also add the curriculum the term is under
+//Once you add a term, you should also add the curriculum the term is under
 2. To add a curriculum to a topic:</br>
 <code>//term/add_curriculum</code></br>
 <code>{
@@ -146,6 +146,21 @@ Once you log in and receive the the token, you can then use the token to access 
  "id":"id of the curriculum the definition is for"
  }
  }</code></br>
+ 
+ 
+<h4>Roles & Users</h4>
+1. To save a role:</br>
+//make sure to use uppercase e.g USER, ADMIN etc</br>
+<code>/role/save</code></br>
+<code>{"name":"role name"}</code></br>
+//the default role when a new user is added is "USER"</br>
+2. To add another role e.g "ADMIN" to a user:</br>
+<code>/user/add_role</code></br>
+<code>{
+ "username:"username of the user",
+ "roleName":"name of the role"
+ }</code></br>
+ 
 
 
 
