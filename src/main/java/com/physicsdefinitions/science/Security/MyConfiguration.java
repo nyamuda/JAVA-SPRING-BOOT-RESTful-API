@@ -39,8 +39,8 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/login").permitAll()
                 // ADMIN ROUTES
-                .antMatchers("/user/save").permitAll().antMatchers("/curriculum/save").hasAuthority("ADMIN")
-                .antMatchers("/subject/save").hasAuthority("ADMIN").antMatchers("/topic/save").hasAuthority("ADMIN")
+                .antMatchers("/curriculum/save").hasAuthority("ADMIN").antMatchers("/subject/save")
+                .hasAuthority("ADMIN").antMatchers("/topic/save").hasAuthority("ADMIN")
                 .antMatchers("/topic/add_curriculum").hasAuthority("ADMIN").antMatchers("/term/save")
                 .hasAuthority("ADMIN").antMatchers("term/add_curriculum").hasAuthority("ADMIN")
                 .antMatchers("definition/save").hasAuthority("ADMIN").antMatchers("/role/save").hasAuthority("ADMIN")
@@ -49,7 +49,8 @@ public class MyConfiguration extends WebSecurityConfigurerAdapter {
                 // USER ROUTES
                 .antMatchers("/curriculum**").hasAuthority("USER").antMatchers("/subject**").hasAuthority("USER")
                 .antMatchers("term**").hasAuthority("USER").antMatchers("/definition**").hasAuthority("USER")
-                .antMatchers("user/{username}").hasAuthority("USER");
+                .antMatchers("user/{username}").hasAuthority("USER").antMatchers("/user/save").permitAll()
+                .antMatchers("/").permitAll();
 
         http.csrf().disable();
         http.formLogin().disable();

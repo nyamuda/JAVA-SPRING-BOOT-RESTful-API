@@ -1,6 +1,8 @@
 package com.physicsdefinitions.science.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -35,8 +37,16 @@ public class MyUserController {
 
     }
 
+    // HOME URL
+    @GetMapping("/")
+    @ResponseBody
+    public ResponseEntity<Object> goHome() {
+        Map<String, Boolean> success = new HashMap<>();
+        success.put("success", true);
+        return new ResponseEntity<Object>(success, HttpStatus.OK);
+    }
+
     @GetMapping("/users")
-    @CrossOrigin
     @ResponseBody
     public ResponseEntity<List<MyUser>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
@@ -52,7 +62,6 @@ public class MyUserController {
     // find the user by username and return the username else throw an exception
     @GetMapping("/user/{username}")
     @ResponseBody
-    @CrossOrigin
     public ResponseEntity<Object> getUserByUsername(@PathVariable("username") String username) {
         MyUser user = userRepo.findByUsername(username);
         if (user == null) {
@@ -72,7 +81,6 @@ public class MyUserController {
 
     @PostMapping("/role/save")
     @ResponseBody
-    @CrossOrigin
     public ResponseEntity<Object> saveRole(@RequestBody Role role) {
         userService.saveRole(role);
         return ResponseEntity.status(HttpStatus.OK).body("Role added.");
