@@ -9,7 +9,7 @@ New terms are still being added to the database. So there aren't a lot of terms 
 
 <h2>Screenshots</h2> 
 The structure of the database is as follows:
-<image src="">
+<image src="https://github.com/pnyamuda/Data-Engineering-University-Courses/blob/master/sciencetermsdatabase.png?raw=true">
 
 <h2>Tech/Framework used</h2>
 Java, Spring Boot, Hibernate & MySQL.
@@ -23,7 +23,9 @@ username:””,
 password:””, 
 firstName:””,
 secondName:””,
-curriculum:””
+curriculum:{
+  id:""
+  }
 }
 </code>
 
@@ -39,19 +41,34 @@ To login:</br>
 </br>
 Once the user logs in, the API will send a token(lasts for 24hrs) that the user can use to access the API.
 
+<h3>Routes the user can access are:</h3></br>
+<h4>Curriculums</h4>
+1. To get all the curriculums:</br>
+<code>/curriculums</code></br>
+2. To get a particular curriculum:</br>
+<code>/curriculum/{id}</code></br>
 
+<h4>Subjects</h4>
+1. To get all the subjects for a curriculum:</br>
+<code>curriculum/{curriculumId}/subjects</code></br>
+2. To get a particular subject:</br>
+<code>subject/{id}</code></br>
 
-Routes the user can access are:</br>
+<h4>Topics</h4>
+1. To get all the topics for a particular curriculum and subject:</br>
+<code>subject/{subjectId}/curriculum/{curriculumId}/topics</code></br>
+2. To get a particular topic:</br>
+<code>topic/{topicId}</code></br>
 
-//To get all the terms for particular curriculum and subject:</br>
+<h4>Terms</h4>
+1. To get all the terms for particular curriculum and subject:</br>
 <code>curriculum/{curriculumId}/subject/{subjectId}/terms</br></code></br>
-//To access all the terms for particular curriculum and topic:</br>
+2. To access all the terms for particular curriculum and topic:</br>
 <code>curriculum/{curriculumId}/topic/{topicId}/terms</code></br>
-//To get a particular term:</br>
+3. To get a particular term:</br>
 <code>/term/{id}</code></br>
-//To search for a particular term:</br>
+4. To search for a particular term:</br>
 <code>curriculum/{curriculumId}/term/{termName}</code></br>
-//To get the definition of a term:</br>
+5. To get the definition of a term:</br>
 <code>curriculum/{curriculumId}/term/{termId}/definition</code>
-
 
