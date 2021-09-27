@@ -77,7 +77,15 @@ public class MyUserServiceImplementation implements MyUserService {
     @Override
     public void addRoleToUser(String username, String roleName) {
         MyUser user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new ApiException("Username does not exists.");
+        }
         Role role = roleRepo.findByName(roleName);
+
+        if (role == null) {
+            throw new ApiException("RoleName does not exists.");
+        }
+
         user.getRoles().add(role);
 
     }

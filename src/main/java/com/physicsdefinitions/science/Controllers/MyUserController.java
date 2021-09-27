@@ -5,8 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.physicsdefinitions.science.ErrorHandling.ApiException;
 import com.physicsdefinitions.science.Models.MyUser;
 import com.physicsdefinitions.science.Models.Role;
+import com.physicsdefinitions.science.Repositories.MyUserRepo;
 import com.physicsdefinitions.science.Services.MyUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,8 +27,11 @@ public class MyUserController {
     @Autowired
     private MyUserService userService;
 
-    public MyUserController(MyUserService userService) {
+    private MyUserRepo userRepo;
+
+    public MyUserController(MyUserService userService, MyUserRepo userRepo) {
         this.userService = userService;
+        this.userRepo = userRepo;
 
     }
 
@@ -41,6 +47,18 @@ public class MyUserController {
     @CrossOrigin
     public ResponseEntity<List<Role>> getRoles() {
         return ResponseEntity.ok().body(userService.getRoles());
+    }
+
+    // find the user by username and return the username else throw an exception
+    @GetMapping("/user/{username}")
+    @ResponseBody
+    @CrossOrigin
+    public ResponseEntity<Object> getUserByUsername(@PathVariable("username") String username) {
+        MyUser user = userRepo.findByUsername(username);
+        if (user == null) {
+            throw new ApiException("User not found.");
+        }
+        return ResponseEntity.ok().body(user.getUsername());
     }
 
     @PostMapping("/user/save")
