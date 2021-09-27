@@ -45,6 +45,10 @@ To login:</br>
 Once the user logs in, the API will send a token(lasts for 24hrs) that the user can use to access the API.
 
 <h3>Routes the user can access are:</h3></br>
+<h4>Users</h4>
+1. To get a user by username</br>
+<code>/user/{username}</code></br>
+
 <h4>Curriculums</h4>
 1. To get all the curriculums:</br>
 <code>/curriculums</code></br>
@@ -160,10 +164,10 @@ Once you log in and receive the the token, you can then use the token to access 
  "username:"username of the user",
  "roleName":"name of the role"
  }</code></br>
-3. To see all the users:
-  <code>/users</code>
-4. To see all the roles:
-  <code>/roles</code>
+3. To see all the users:</br>
+  <code>/users</code></br>
+4. To see all the roles:</br>
+  <code>/roles</code></br>
  
 
 
