@@ -53,19 +53,19 @@ Once the user logs in, the API will send a token(lasts for 24hrs) that the user 
 
 <h4>Subjects</h4>
 1. To get all the subjects for a curriculum:</br>
-<code>curriculum/{curriculumId}/subjects</code></br>
+<code>/curriculum/{curriculumId}/subjects</code></br>
 2. To get a particular subject:</br>
-<code>subject/{id}</code></br>
+<code>/subject/{id}</code></br>
 
 <h4>Topics</h4>
 1. To get all the topics for a particular curriculum and subject:</br>
-<code>subject/{subjectId}/curriculum/{curriculumId}/topics</code></br>
+<code>/subject/{subjectId}/curriculum/{curriculumId}/topics</code></br>
 2. To get a particular topic:</br>
 <code>topic/{topicId}</code></br>
 
 <h4>Terms</h4>
 1. To get all the terms for particular curriculum and subject:</br>
-<code>curriculum/{curriculumId}/subject/{subjectId}/terms</br></code></br>
+<code>/curriculum/{curriculumId}/subject/{subjectId}/terms</br></code></br>
 2. To access all the terms for particular curriculum and topic:</br>
 <code>curriculum/{curriculumId}/topic/{topicId}/terms</code></br>
 3. To get a particular term:</br>
@@ -73,7 +73,7 @@ Once the user logs in, the API will send a token(lasts for 24hrs) that the user 
 4. To search for a particular term:</br>
 <code>curriculum/{curriculumId}/term/{termName}</code></br>
 5. To get the definition of a term:</br>
-<code>curriculum/{curriculumId}/term/{termId}/definition</code>
+<code>/curriculum/{curriculumId}/term/{termId}/definition</code>
 
 <h2>Exceptions</h2>
 All exceptions will send the error in the following format:</br>
@@ -127,7 +127,7 @@ Once you log in and receive the the token, you can then use the token to access 
 <code>{"name":"Topic Name"}</code></br>
 //Once you add a term, you should also add the curriculum the term is under
 2. To add a curriculum to a topic:</br>
-<code>//term/add_curriculum</code></br>
+<code>/term/add_curriculum</code></br>
 <code>{
  "termName":"Topic Name",
  "curriculumId":"Id of curriculum"
@@ -160,6 +160,10 @@ Once you log in and receive the the token, you can then use the token to access 
  "username:"username of the user",
  "roleName":"name of the role"
  }</code></br>
+3. To see all the users:
+  <code>/users</code>
+4. To see all the roles:
+  <code>/roles</code>
  
 
 
