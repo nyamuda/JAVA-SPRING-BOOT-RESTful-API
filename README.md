@@ -7,7 +7,7 @@ One of the main reasons students fail physics and chemistry exams is the inabili
 <h2>Build Status</h2>
 New terms are still being added to the database. So there aren't a lot of terms yet.
 
-<h2>Screenshots</h2> 
+<h2>Database</h2>
 The structure of the database is as follows:
 <image src="https://github.com/pnyamuda/Data-Engineering-University-Courses/blob/master/sciencetermsdatabase.png?raw=true">
 
@@ -16,6 +16,10 @@ Java, Spring Boot, Hibernate & MySQL.
 The API uses JSON Web Tokens for authentication and authorization.
 
 <h2>How to Use?</h2>
+ Register:</br>
+ <code>/register</code></br>
+ Login:</br>
+ <code>/login</code></br>
 To use the API, the user needs register first and the following fields are required:</br>
 <code>
 {
@@ -36,7 +40,6 @@ To login:</br>
 “username””,
 “password”:””
 }</br>
-//the route is /login
 </code>
 </br>
 Once the user logs in, the API will send a token(lasts for 24hrs) that the user can use to access the API.
