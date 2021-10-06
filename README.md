@@ -8,7 +8,7 @@ One of the main reasons students fail physics and chemistry exams is the inabili
 New terms are still being added to the database. So there aren't a lot of terms yet.
 
 <h2>How to set it up</h2>
-<p>If you just want to play around with the the API, use the url:https://scienceterms.herokuapp.com</br>
+<p>If you just want to play around with the the API, use the url: https://scienceterms.herokuapp.com
 </p>
 <p>To set up the application, clone the repository, then run</p>
 <div>
